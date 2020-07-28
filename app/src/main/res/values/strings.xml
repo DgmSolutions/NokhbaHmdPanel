@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">NokhbaHmdPanel</string>
+    <string name="logo_title">لوحة التحكم</string>
+    <string name="login_title">تسجيل الدخول</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="pass_word">كلمة المرور</string>
+    <string name="login_text">دخول</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help_req">طلبات المساعدة</string>
+    <string name="voulenter_req">طلبات التطوع</string>
+    <string name="help_info">معلومات</string>
+</resources>
