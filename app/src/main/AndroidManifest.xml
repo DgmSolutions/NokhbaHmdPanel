@@ -16,15 +16,13 @@
         <activity android:name=".InfoScreen"></activity>
         <activity android:name=".VinfoScreen" />
         <activity android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".LoginScreen">
-
         </activity>
 
         <meta-data

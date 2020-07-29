@@ -81,7 +81,7 @@ public class HelpFragment extends Fragment  {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_help, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_id);
-        Query q=help.orderBy("date", Query.Direction.DESCENDING);
+        Query q=help.orderBy("date", Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Help> options =new FirestoreRecyclerOptions.Builder<Help>()
                 .setQuery(q,Help.class)
                 .build();
@@ -97,32 +97,16 @@ new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | 
 
     @Override
     public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Login Alert")
-                .setMessage("Are you sure, you want to continue ?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        adapter.DeleteItem(viewHolder.getAdapterPosition());
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
-        //Creating dialog box
-        AlertDialog dialog  = builder.create();
-        dialog.show();
+        adapter.DeleteItem(viewHolder.getAdapterPosition());
+
 
     }
 }).attachToRecyclerView(recyclerView);
 adapter.setClick(new HelpAdapter.ItemClick() {
     @Override
     public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-        String id=documentSnapshot.getId();
+
         Help obj=documentSnapshot.toObject(Help.class);
         Intent i =new Intent(getActivity(), InfoScreen.class);
         i.putExtra("help",obj);

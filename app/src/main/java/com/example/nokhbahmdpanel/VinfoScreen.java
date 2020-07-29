@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.nokhbahmdpanel.model.Valunteer;
+
 public class VinfoScreen extends AppCompatActivity {
     final String permissionToCall = Manifest.permission.CALL_PHONE;
     private static Intent phoneCallIntent;
@@ -28,7 +30,10 @@ public class VinfoScreen extends AppCompatActivity {
         vtype = findViewById(R.id.v_type_id);
         // Button
         call_btn = findViewById(R.id.call_id);
-
+        Valunteer v = (Valunteer) getIntent().getSerializableExtra("valunteer");
+        vfullname.setText(v.getNom()+" "+v.getPrenom());
+        phone_number.setText(v.getPhone());
+        vtype.setText(v.getService());
         findViewById(R.id.back_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
