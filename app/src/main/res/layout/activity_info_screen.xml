@@ -68,7 +68,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/cairo"
-                    android:text="إقتناء حاجيات المنزل"
                     android:textSize="18sp" />
 
 
@@ -88,7 +87,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:fontFamily="@font/cairo_black"
-                    android:text="شيبان مراد"
                     android:textSize="16sp" />
 
                 <TextView
@@ -123,7 +121,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:fontFamily="@font/cairo_black"
-                    android:text="0671483234"
                     android:textSize="16sp" />
 
                 <TextView
@@ -159,7 +156,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:fontFamily="@font/cairo_black"
-                    android:text="لا"
                     android:textSize="16sp" />
 
                 <TextView
@@ -188,7 +184,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:fontFamily="@font/cairo_black"
-                    android:text="نعم"
                     android:textSize="16sp" />
 
                 <TextView
@@ -217,7 +212,6 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="5dp"
                     android:fontFamily="@font/cairo_black"
-                    android:text="2"
                     android:textSize="18sp" />
 
                 <TextView
@@ -258,7 +252,6 @@
                     android:background="@drawable/round_layout_gris"
                     android:fontFamily="@font/cairo_black"
                     android:paddingRight="5dp"
-                    android:text="4 خبز / حليب / كيلو بطاطا / 2 كيلو بصل"
                     android:textSize="16sp" />
 
 

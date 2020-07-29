@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nokhbahmdpanel.model.Help;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -49,6 +50,19 @@ public class InfoScreen extends AppCompatActivity {
         // Button
         call_btn = findViewById(R.id.call_id);
         map_btn = findViewById(R.id.map_id);
+
+            Help user = (Help) getIntent().getSerializableExtra("help");
+            fullname.setText(user.getNom()+" "+user.getPrenom());
+            phone_number.setText(user.getPhone());
+            covid_y_n.setText(user.getCovid_you());
+            fcovid_y_n.setText(user.getFcovid());
+            covid_number.setText(String.valueOf(user.getNumCovide()));
+            help_desc.setText(user.getDesc());
+            help_type.setText(user.getService());
+
+        double latitudeUser =user.getLocalisation().get("latitude");
+        double longtitudeUser=user.getLocalisation().get("longtitude");
+
         // click listener
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
