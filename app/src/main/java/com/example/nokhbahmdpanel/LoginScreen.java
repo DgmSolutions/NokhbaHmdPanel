@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.nokhbahmdpanel.model.Security;
 import com.example.nokhbahmdpanel.model.users;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -60,10 +61,18 @@ public class LoginScreen extends AppCompatActivity {
                   String user = users.getUser();
                   String mdp = users.getMdp();
                   int act = users.getIsActive();
-                  if(u.equals(user) && p.equals(mdp) && act ==1) {
-                      Toast.makeText(LoginScreen.this, user, Toast.LENGTH_LONG).show();
-                      saveData(u,p);
-                      break;
+
+
+                  try {
+                      String d =Security.decrypt(mdp);
+                      if(u.equals(user) && p.equals(d) && act ==1) {
+                       saveData(u,p);
+                       break;
+              }else {
+
+                      }
+                  } catch (Exception e) {
+                      e.printStackTrace();
                   }
               }
 
@@ -80,9 +89,17 @@ public class LoginScreen extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user",u );
-        editor.putString("mdp",p );
         editor.apply();
         Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
         startMain();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
+        if (sharedPrefs.contains("user")){
+            startMain();
+        }
     }
 }

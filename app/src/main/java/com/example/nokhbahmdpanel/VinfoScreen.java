@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,5 +53,19 @@ public class VinfoScreen extends AppCompatActivity {
                 startActivity(phoneCallIntent);
             }
         });
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
+        if (!sharedPrefs.contains("user")){
+            startLogin();
+        }
+    }
+
+    private void startLogin() {
+        Intent intent = new Intent(this,LoginScreen.class);
+        startActivity(intent);
+        finish();
     }
 }

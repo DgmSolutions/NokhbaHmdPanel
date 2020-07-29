@@ -7,6 +7,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -53,6 +55,20 @@ public class MainActivity extends AppCompatActivity {
                negative.setBackgroundColor(Color.TRANSPARENT);
                negative.setTextColor(Color.BLACK);
 
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
+        if (!sharedPrefs.contains("user")){
+            startLogin();
+        }
+    }
+
+    private void startLogin() {
+        Intent intent = new Intent(this,LoginScreen.class);
+        startActivity(intent);
+        finish();
     }
 
 }

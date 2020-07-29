@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
@@ -96,9 +97,20 @@ public class InfoScreen extends AppCompatActivity {
     fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(InfoScreen.this);
     }
 
+
+    private void startLogin() {
+        Intent intent = new Intent(this,LoginScreen.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
+        SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
+        if (!sharedPrefs.contains("user")){
+            startLogin();
+        }
         if(ActivityCompat.checkSelfPermission(InfoScreen.this,permissionToFineLocation)
                 == PackageManager.PERMISSION_GRANTED){
 
