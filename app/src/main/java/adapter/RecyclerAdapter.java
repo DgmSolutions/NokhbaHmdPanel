@@ -1,6 +1,5 @@
 package adapter;
 
-import android.app.usage.UsageEvents;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nokhbahmdpanel.R;
-
-import java.util.ArrayList;
-import java.util.EventListener;
-import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
@@ -42,14 +37,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView imageView;
-        TextView info,type,phone;
+        TextView info,type,date;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.RowimageView);
             info = itemView.findViewById(R.id.InfotextView);
-            phone = itemView.findViewById(R.id.PhonetextView);
             type = itemView.findViewById(R.id.TypetextView);
+            date = itemView.findViewById(R.id.DatetextView);
         }
 
         @Override

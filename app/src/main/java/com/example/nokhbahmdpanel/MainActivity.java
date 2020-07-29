@@ -7,7 +7,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(MainActivity.this)
-                .setTitle("خروج")
+       AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("خروج")
                 .setCancelable(false)
-                .setMessage("هل تريد الحرزج من التطبيق ؟")
+                .setMessage("هل تريد الخروج من التطبيق ؟")
                 .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -44,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
-                })
-                .create().show();
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+               Button negative = alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
+               negative.setBackgroundColor(Color.TRANSPARENT);
+               negative.setTextColor(Color.BLACK);
 
     }
 

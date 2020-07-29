@@ -9,5 +9,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="help_req">طلبات المساعدة</string>
     <string name="voulenter_req">طلبات التطوع</string>
-    <string name="help_info">معلومات</string>
+    <string name="help_info"> معلومات طلب المساعدة</string>
+    <string name="voulenter_info"> معلومات عن المتطوع</string>
+
 </resources>
