@@ -11,8 +11,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.nokhbahmdpanel.classes.CheckConx;
+import com.example.nokhbahmdpanel.classes.Snackbar;
 import com.example.nokhbahmdpanel.model.Valunteer;
 
 public class VinfoScreen extends AppCompatActivity {
@@ -20,11 +23,12 @@ public class VinfoScreen extends AppCompatActivity {
     private static Intent phoneCallIntent;
     private Button call_btn;
     private TextView phone_number,vfullname,vtype;
+    private LinearLayout linear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vinfo_screen);
-
+        linear=findViewById(R.id.linear);
         // Text Views
         phone_number = findViewById(R.id.v_phone_number);
         vfullname = findViewById(R.id.v_info);
@@ -57,6 +61,9 @@ public class VinfoScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(CheckConx.isConnected(this)==false){
+            Snackbar.SnackBarMessage(linear,getString(R.string.checkConx), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
+        }
         SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
         if (!sharedPrefs.contains("user")){
             startLogin();

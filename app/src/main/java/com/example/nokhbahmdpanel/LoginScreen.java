@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.nokhbahmdpanel.classes.CheckConx;
+import com.example.nokhbahmdpanel.classes.Snackbar;
 import com.example.nokhbahmdpanel.model.Security;
 import com.example.nokhbahmdpanel.model.users;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,6 +30,7 @@ public class LoginScreen extends AppCompatActivity {
     private Button login_btn;
     private CollectionReference db = FirebaseFirestore.getInstance().collection("Users");
     private static final String TAG = "LoginScreen";
+    private LinearLayout linear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +39,22 @@ public class LoginScreen extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login_btn = findViewById(R.id.login_btn);
-
+        linear=findViewById(R.id.linear);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String user=username.getText().toString().trim();
                 String mdp=password.getText().toString().trim();
+                if(CheckConx.isConnected(LoginScreen.this)== true){
+                  if(!user.isEmpty() && !mdp.isEmpty()) {
+                   getUsers(user, mdp);
+                  }else{
+                      Snackbar.SnackBarMessage(linear,getString(R.string.champ), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
+                  }
+               }else{
+                   Snackbar.SnackBarMessage(linear,getString(R.string.checkConx), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
+               }
 
-                      getUsers(user,mdp);
             }
         });
     }
@@ -81,6 +93,7 @@ public class LoginScreen extends AppCompatActivity {
           @Override
           public void onFailure(@NonNull Exception e) {
               Log.d(TAG,e.getMessage());
+              Snackbar.SnackBarMessage(linear,getString(R.string.errorMssg), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
           }
       });
 
@@ -102,4 +115,6 @@ public class LoginScreen extends AppCompatActivity {
             startMain();
         }
     }
+
+
 }

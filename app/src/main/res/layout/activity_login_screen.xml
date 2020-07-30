@@ -9,33 +9,36 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="50dp"
-        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
-        android:gravity="center">
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="50dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/cairo_black"
-            android:textSize="28sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/login_title"/>
+            android:fontFamily="@font/cairo_black"
+            android:text="@string/login_title"
+            android:textSize="28sp" />
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:startIconDrawable="@drawable/ic_baseline_person_24"
-            app:startIconTint="@color/green"
-            app:boxCornerRadiusTopStart="16dp"
+            android:background="@color/white"
+            android:hint="@string/user_name"
             app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="1dp"
-            android:hint="@string/user_name"
-            android:background="@color/white"
             app:endIconMode="clear_text"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="@color/green">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username"
@@ -44,19 +47,20 @@
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:startIconDrawable="@drawable/ic_baseline_lock_24"
-            app:startIconTint="@color/green"
-            app:boxCornerRadiusTopStart="16dp"
+            android:background="@color/white"
+            android:hint="@string/pass_word"
             app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="1dp"
             app:passwordToggleEnabled="true"
-            android:hint="@string/pass_word"
-            android:background="@color/white"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:startIconDrawable="@drawable/ic_baseline_lock_24"
+            app:startIconTint="@color/green">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"

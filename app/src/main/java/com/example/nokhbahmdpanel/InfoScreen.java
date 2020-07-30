@@ -14,9 +14,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nokhbahmdpanel.classes.CheckConx;
+import com.example.nokhbahmdpanel.classes.Snackbar;
 import com.example.nokhbahmdpanel.model.Help;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,13 +36,14 @@ public class InfoScreen extends AppCompatActivity {
     private Button call_btn,map_btn;
     private TextView phone_number,fullname,covid_y_n,fcovid_y_n,covid_number,help_desc,help_type;
     private final int LOCATION_REQUEST_CODE=1000;
-
+    private LinearLayout linear;
     FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_screen);
+        linear=findViewById(R.id.linear);
         // Text Views
         phone_number = findViewById(R.id.phone_number);
         fullname = findViewById(R.id.info_id);
@@ -107,6 +111,9 @@ public class InfoScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(CheckConx.isConnected(this)==false){
+            Snackbar.SnackBarMessage(linear,getString(R.string.checkConx), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
+        }
         SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
         if (!sharedPrefs.contains("user")){
             startLogin();

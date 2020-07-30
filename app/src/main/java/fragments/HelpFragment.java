@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.nokhbahmdpanel.InfoScreen;
@@ -23,6 +24,7 @@ import com.example.nokhbahmdpanel.model.Help;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -70,7 +72,7 @@ public class HelpFragment extends Fragment  {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    private LinearLayout linearLayout;
     private RecyclerView recyclerView;
     private HelpAdapter adapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -81,6 +83,7 @@ public class HelpFragment extends Fragment  {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_help, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_id);
+        linearLayout= getActivity().findViewById(R.id.layout);
         Query q=help.orderBy("date", Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Help> options =new FirestoreRecyclerOptions.Builder<Help>()
                 .setQuery(q,Help.class)
@@ -97,8 +100,28 @@ new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | 
 
     @Override
     public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+        Snackbar snackbar = Snackbar
+                .make( linearLayout,"hhhhhhhh" , Snackbar.LENGTH_LONG);
+        snackbar.setAction("no", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        adapter.DeleteItem(viewHolder.getAdapterPosition());
+
+
+                adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+            }
+        });
+        snackbar.setAction("ok", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                adapter.DeleteItem(viewHolder.getAdapterPosition());
+
+            }
+        });
+        snackbar.setActionTextColor(getResources().getColor(R.color.green));
+        snackbar.show();
 
 
     }

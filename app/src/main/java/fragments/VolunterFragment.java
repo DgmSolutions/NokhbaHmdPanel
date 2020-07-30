@@ -1,6 +1,7 @@
 package fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.nokhbahmdpanel.InfoScreen;
 import com.example.nokhbahmdpanel.R;
@@ -19,6 +21,7 @@ import com.example.nokhbahmdpanel.VinfoScreen;
 import com.example.nokhbahmdpanel.model.Help;
 import com.example.nokhbahmdpanel.model.Valunteer;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -61,6 +64,7 @@ public class VolunterFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    private  LinearLayout linearLayout;
     private RecyclerView recyclerView;
     private VolunteerAdapter adapter;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -70,6 +74,7 @@ public class VolunterFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_volunter, container, false);
+        linearLayout= getActivity().findViewById(R.id.layout);
         recyclerView = rootView.findViewById(R.id.recycler_id);
         Query q=volunteer.orderBy("date", Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Valunteer> options =new FirestoreRecyclerOptions.Builder<Valunteer>()
@@ -87,8 +92,29 @@ public class VolunterFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+                Snackbar snackbar = Snackbar
+                        .make( linearLayout,"hhhhhhhh" , Snackbar.LENGTH_LONG);
+                snackbar.setAction("no", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
-                adapter.DeleteItem(viewHolder.getAdapterPosition());
+
+
+                         adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                    }
+                });
+                snackbar.setAction("ok", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+
+                        adapter.DeleteItem(viewHolder.getAdapterPosition());
+
+                    }
+                });
+                snackbar.setActionTextColor(getResources().getColor(R.color.green));
+                snackbar.show();
+
 
 
             }
