@@ -14,4 +14,9 @@
     <string name="champ">أحد الحقول فارغ ، يرجى التحقق من النموذج مرة أخرى</string>
     <string name="errorMssg">حدث خطأ يرجى المحاولة مرة أخرى</string>
     <string name="checkConx">يرجى التحقق من اتصال الإنترنت الخاص بك من فضلك</string>
+    <string name="error_login">كلمة المرور أو اسم المستخدم غير الصحيح</string>
+    <!-- Notification-->
+    <string name="channal_id">panel</string>
+    <string name="channal_dsc">demande service</string>
+    <string name="channal_nom">demande service Notification</string>
 </resources>

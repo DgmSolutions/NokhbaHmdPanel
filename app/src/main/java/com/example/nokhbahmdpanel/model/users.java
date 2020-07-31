@@ -1,10 +1,18 @@
 package com.example.nokhbahmdpanel.model;
 
 public class users {
-    private String user,mdp;
+    private String user,mdp,Token;
     private int isActive;
 
     public users() {
+    }
+
+    public String getToken() {
+        return Token;
+    }
+
+    public void setToken(String token) {
+        Token = token;
     }
 
     public users(String user, String mdp, int isActive) {

@@ -69,7 +69,7 @@ public class LoginScreen extends AppCompatActivity {
           public void onSuccess(QuerySnapshot Snapshots) {
               for (QueryDocumentSnapshot documentSnapshot :Snapshots) {
                  users users = documentSnapshot.toObject(users.class);
-
+                   String id=documentSnapshot.getId();
                   String user = users.getUser();
                   String mdp = users.getMdp();
                   int act = users.getIsActive();
@@ -78,10 +78,10 @@ public class LoginScreen extends AppCompatActivity {
                   try {
                       String d =Security.decrypt(mdp);
                       if(u.equals(user) && p.equals(d) && act ==1) {
-                       saveData(u,p);
+                       saveData(u,id);
                        break;
               }else {
-
+                          Snackbar.SnackBarMessage(linear,getString(R.string.error_login), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
                       }
                   } catch (Exception e) {
                       e.printStackTrace();
@@ -102,12 +102,13 @@ public class LoginScreen extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user",u );
+        editor.putString("id",p );
         editor.apply();
         Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
         startMain();
     }
 
-    @Override
+   @Override
     protected void onStart() {
         super.onStart();
         SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);

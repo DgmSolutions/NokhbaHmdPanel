@@ -1,5 +1,6 @@
 package com.example.nokhbahmdpanel;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -9,14 +10,22 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.nokhbahmdpanel.classes.CheckConx;
 import com.example.nokhbahmdpanel.classes.Snackbar;
 import com.example.nokhbahmdpanel.model.Valunteer;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class VinfoScreen extends AppCompatActivity {
     final String permissionToCall = Manifest.permission.CALL_PHONE;
@@ -28,6 +37,19 @@ public class VinfoScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vinfo_screen);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if(task.isSuccessful()){
+                    String token = task.getResult().getToken();
+                    Log.d("token",token);
+                    updateToken(token);
+                }else{
+                    Toast.makeText(VinfoScreen.this,"token not finding",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         linear=findViewById(R.id.linear);
         // Text Views
         phone_number = findViewById(R.id.v_phone_number);
@@ -74,5 +96,13 @@ public class VinfoScreen extends AppCompatActivity {
         Intent intent = new Intent(this,LoginScreen.class);
         startActivity(intent);
         finish();
+    }
+    private void updateToken(String refreshToken) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
+      String id=  sharedPrefs.getString("id","");
+        DocumentReference user = db.collection("Users").document(id);
+        user.update("Token",refreshToken);
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.nokhbahmdpanel;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,9 +12,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView NavigationViewBottom;
@@ -22,10 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("start","ok");
 
-
-
-
+        Log.d("end","ok");
         // Navigation Bottom View
         NavigationViewBottom = (BottomNavigationView) findViewById(R.id.bottom_nav_view);
         NavController navController = Navigation.findNavController(MainActivity.this,R.id.nav_host_fragment);

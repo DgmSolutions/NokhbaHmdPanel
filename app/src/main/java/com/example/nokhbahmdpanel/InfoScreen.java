@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,9 +24,14 @@ import com.example.nokhbahmdpanel.classes.Snackbar;
 import com.example.nokhbahmdpanel.model.Help;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class InfoScreen extends AppCompatActivity {
 
@@ -43,6 +49,18 @@ public class InfoScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_screen);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if(task.isSuccessful()){
+                    String token = task.getResult().getToken();
+                    Log.d("token",token);
+                    updateToken(token);
+                }else{
+                    Toast.makeText(InfoScreen.this,"token not finding",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         linear=findViewById(R.id.linear);
         // Text Views
         phone_number = findViewById(R.id.phone_number);
@@ -177,5 +195,13 @@ public class InfoScreen extends AppCompatActivity {
                 Toast.makeText(InfoScreen.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void updateToken(String refreshToken) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        SharedPreferences sharedPrefs = getSharedPreferences("login", MODE_PRIVATE);
+        String id=  sharedPrefs.getString("id","");
+        DocumentReference user = db.collection("Users").document(id);
+        user.update("Token",refreshToken);
+
     }
 }
