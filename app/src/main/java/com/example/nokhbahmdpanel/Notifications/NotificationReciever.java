@@ -15,6 +15,8 @@ import com.example.nokhbahmdpanel.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Random;
+
 public class NotificationReciever extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
@@ -25,6 +27,8 @@ public class NotificationReciever extends FirebaseMessagingService {
 
     }
     private void showNotification(Context context, String title, String body){
+        Random random=new Random();
+        int id=random.nextInt();
         NotificationCompat.Builder buler = new NotificationCompat.Builder(context, context.getString(R.string.channal_id))
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.drawable.new_logo))
                 .setSmallIcon(R.drawable.new_logo)
@@ -39,7 +43,7 @@ public class NotificationReciever extends FirebaseMessagingService {
                 .setCategory(NotificationCompat.CATEGORY_ALARM);
 
         NotificationManagerCompat notmanager = NotificationManagerCompat.from(context);
-        notmanager.notify(1, buler.build());
+        notmanager.notify(id, buler.build());
     }
     private static PendingIntent intentTask(Context context){
         Intent i =new Intent(context, MainActivity.class);
