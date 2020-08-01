@@ -11,12 +11,13 @@
     <string name="voulenter_req">طلبات التطوع</string>
     <string name="help_info"> معلومات طلب المساعدة</string>
     <string name="voulenter_info"> معلومات عن المتطوع</string>
-    <string name="champ">أحد الحقول فارغ ، يرجى التحقق من النموذج مرة أخرى</string>
+    <string name="champ">أحد الحقول فارغ ، يرجى التحقق من جميع الحقول مرة أخرى</string>
     <string name="errorMssg">حدث خطأ يرجى المحاولة مرة أخرى</string>
     <string name="checkConx">يرجى التحقق من اتصال الإنترنت الخاص بك من فضلك</string>
     <string name="error_login">كلمة المرور أو اسم المستخدم غير الصحيح</string>
     <!-- Notification-->
     <string name="channal_id">panel</string>
-    <string name="channal_dsc">demande service</string>
-    <string name="channal_nom">demande service Notification</string>
+    <string name="channal_dsc">Demande service</string>
+    <string name="channal_nom">Demande service Notification</string>
+    <string name="title_activity_map_screen">Map</string>
 </resources>

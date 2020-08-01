@@ -1,5 +1,7 @@
 package fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.nokhbahmdpanel.InfoScreen;
@@ -76,7 +79,7 @@ public class VolunterFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_volunter, container, false);
         linearLayout= getActivity().findViewById(R.id.layout);
         recyclerView = rootView.findViewById(R.id.recycler_id);
-        Query q=volunteer.orderBy("date", Query.Direction.ASCENDING);
+        Query q=volunteer.orderBy("date", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Valunteer> options =new FirestoreRecyclerOptions.Builder<Valunteer>()
                 .setQuery(q,Valunteer.class)
                 .build();
@@ -92,29 +95,27 @@ public class VolunterFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
-                Snackbar snackbar = Snackbar
-                        .make( linearLayout,"hhhhhhhh" , Snackbar.LENGTH_LONG);
-                snackbar.setAction("no", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-
-
-                         adapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                    }
-                });
-                snackbar.setAction("ok", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-
-                        adapter.DeleteItem(viewHolder.getAdapterPosition());
-
-                    }
-                });
-                snackbar.setActionTextColor(getResources().getColor(R.color.green));
-                snackbar.show();
-
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("حذف الطلبات")
+                        .setCancelable(false)
+                        .setMessage("هل تريد حذف الطلب ؟")
+                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                adapter.DeleteItem(viewHolder.getAdapterPosition());
+                            }
+                        })
+                        .setNegativeButton("لا", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                Button negative = alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
+                negative.setBackgroundColor(Color.TRANSPARENT);
+                negative.setTextColor(Color.BLACK);
 
 
             }

@@ -3,6 +3,7 @@ package fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.nokhbahmdpanel.InfoScreen;
+import com.example.nokhbahmdpanel.MainActivity;
 import com.example.nokhbahmdpanel.R;
 import com.example.nokhbahmdpanel.VinfoScreen;
 import com.example.nokhbahmdpanel.model.Help;
@@ -84,7 +87,7 @@ public class HelpFragment extends Fragment  {
         final View rootView = inflater.inflate(R.layout.fragment_help, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_id);
         linearLayout= getActivity().findViewById(R.id.layout);
-        Query q=help.orderBy("date", Query.Direction.ASCENDING);
+        Query q=help.orderBy("date", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<Help> options =new FirestoreRecyclerOptions.Builder<Help>()
                 .setQuery(q,Help.class)
                 .build();
@@ -100,28 +103,28 @@ new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | 
 
     @Override
     public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
-        Snackbar snackbar = Snackbar
-                .make( linearLayout,"hhhhhhhh" , Snackbar.LENGTH_LONG);
-        snackbar.setAction("no", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("حذف الطلبات")
+                .setCancelable(false)
+                .setMessage("هل تريد حذف الطلب ؟")
+                .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.DeleteItem(viewHolder.getAdapterPosition());
+                    }
+                })
+                .setNegativeButton("لا", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        Button negative = alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
+        negative.setBackgroundColor(Color.TRANSPARENT);
+        negative.setTextColor(Color.BLACK);
 
-
-
-                adapter.notifyItemChanged(viewHolder.getAdapterPosition());
-            }
-        });
-        snackbar.setAction("ok", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                adapter.DeleteItem(viewHolder.getAdapterPosition());
-
-            }
-        });
-        snackbar.setActionTextColor(getResources().getColor(R.color.green));
-        snackbar.show();
 
 
     }

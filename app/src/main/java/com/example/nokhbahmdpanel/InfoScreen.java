@@ -6,6 +6,8 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -82,16 +84,22 @@ public class InfoScreen extends AppCompatActivity {
             covid_number.setText(String.valueOf(user.getNumCovide()));
             help_desc.setText(user.getDesc());
             help_type.setText(user.getService());
-
-        double latitudeUser =user.getLocalisation().get("latitude");
-        double longtitudeUser=user.getLocalisation().get("longtitude");
+        final String full_name = user.getNom()+" "+user.getPrenom();
+        final double latitudeUser =user.getLocalisation().get("latitude");
+        final double longtitudeUser=user.getLocalisation().get("longtitude");
 
         // click listener
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent MapIntent = new Intent(InfoScreen.this,MapScreen.class);
+                MapIntent.putExtra("fullname",full_name);
+                MapIntent.putExtra("latitude",latitudeUser);
+                MapIntent.putExtra("longtitude",longtitudeUser);
                 askpermission();
                 getMyLocation();
+                startActivity(MapIntent);
+
             }
         });
 
@@ -168,7 +176,6 @@ public class InfoScreen extends AppCompatActivity {
                 //permission Garanted
                 getMyLocation();
             }else {
-                //permission not Garanted
             }
         }
     }
@@ -183,7 +190,7 @@ public class InfoScreen extends AppCompatActivity {
             public void onSuccess(Location location) {
                 if (location != null){
 
-                    Toast.makeText(InfoScreen.this, String.valueOf(location.getLatitude()+" "+location.getLatitude()), Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(InfoScreen.this, String.valueOf(location.getLatitude()+" "+location.getLatitude()), Toast.LENGTH_SHORT).show();
 
                 }
 

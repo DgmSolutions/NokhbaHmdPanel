@@ -3,6 +3,7 @@ package com.example.nokhbahmdpanel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ public class LoginScreen extends AppCompatActivity {
     private CollectionReference db = FirebaseFirestore.getInstance().collection("Users");
     private static final String TAG = "LoginScreen";
     private LinearLayout linear;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,15 +46,21 @@ public class LoginScreen extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog = new ProgressDialog(LoginScreen.this);
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("يرجى الانتظار ...");
+                progressDialog.show();
                 String user=username.getText().toString().trim();
                 String mdp=password.getText().toString().trim();
                 if(CheckConx.isConnected(LoginScreen.this)== true){
                   if(!user.isEmpty() && !mdp.isEmpty()) {
                    getUsers(user, mdp);
                   }else{
+                      progressDialog.dismiss();
                       Snackbar.SnackBarMessage(linear,getString(R.string.champ), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
                   }
                }else{
+                    progressDialog.dismiss();
                    Snackbar.SnackBarMessage(linear,getString(R.string.checkConx), com.google.android.material.snackbar.Snackbar.LENGTH_SHORT,getResources().getColor(R.color.Eblack));
                }
 
@@ -67,13 +76,13 @@ public class LoginScreen extends AppCompatActivity {
       db.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
           @Override
           public void onSuccess(QuerySnapshot Snapshots) {
+              progressDialog.dismiss();
               for (QueryDocumentSnapshot documentSnapshot :Snapshots) {
                  users users = documentSnapshot.toObject(users.class);
                    String id=documentSnapshot.getId();
                   String user = users.getUser();
                   String mdp = users.getMdp();
                   int act = users.getIsActive();
-
 
                   try {
                       String d =Security.decrypt(mdp);
@@ -104,7 +113,7 @@ public class LoginScreen extends AppCompatActivity {
         editor.putString("user",u );
         editor.putString("id",p );
         editor.apply();
-        Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "مرحبا بك", Toast.LENGTH_SHORT).show();
         startMain();
     }
 
