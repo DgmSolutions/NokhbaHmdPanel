@@ -274,6 +274,15 @@
                     android:drawableTint="@color/white"
                     android:fontFamily="@font/cairo_black"
                     android:text="اتصل الآن" />
+                <Button
+                    android:id="@+id/notification_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="15dp"
+                    android:drawableTop="@drawable/ic_baseline_notifications_24"
+                    android:drawableTint="@color/white"
+                    android:fontFamily="@font/cairo_black"
+                    android:text="إرسال إشعار" />
 
                 <Button
                     android:id="@+id/map_id"
@@ -281,7 +290,7 @@
                     android:layout_height="match_parent"
                     android:drawableTop="@drawable/ic_baseline_location_on_24"
                     android:fontFamily="@font/cairo_black"
-                    android:text="تتبع في الخريطة" />
+                    android:text="تتبع على الخريطة" />
 
             </LinearLayout>
         </LinearLayout>

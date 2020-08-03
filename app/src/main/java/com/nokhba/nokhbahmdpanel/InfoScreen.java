@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.icu.text.IDNA;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class InfoScreen extends AppCompatActivity {
     final String permissionToCall = Manifest.permission.CALL_PHONE;
     final String permissionToFineLocation = Manifest.permission.ACCESS_FINE_LOCATION;
     private static Intent phoneCallIntent;
-    private Button call_btn,map_btn;
+    private Button call_btn,map_btn,notification_btn;
     private TextView phone_number,fullname,covid_y_n,fcovid_y_n,covid_number,help_desc,help_type;
     private final int LOCATION_REQUEST_CODE=1000;
     private LinearLayout linear;
@@ -73,6 +74,7 @@ public class InfoScreen extends AppCompatActivity {
         // Button
         call_btn = findViewById(R.id.call_id);
         map_btn = findViewById(R.id.map_id);
+        notification_btn = findViewById(R.id.notification_id);
 
             Help user = (Help) getIntent().getSerializableExtra("help");
             fullname.setText(user.getNom()+" "+user.getPrenom());
@@ -86,7 +88,18 @@ public class InfoScreen extends AppCompatActivity {
         final double latitudeUser =user.getLocalisation().get("latitude");
         final double longtitudeUser=user.getLocalisation().get("longtitude");
 
-        // click listener
+     // click listener
+
+        //notifications button
+        notification_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent intent = new Intent(InfoScreen.this,NotificationScreen.class);
+            startActivity(intent);
+            }
+        });
+        //map button
+
         map_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +121,8 @@ public class InfoScreen extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        //call button
         call_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
