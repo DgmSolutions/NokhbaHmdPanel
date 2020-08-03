@@ -17,27 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.example.nokhbahmdpanel.InfoScreen;
-import com.example.nokhbahmdpanel.MainActivity;
-import com.example.nokhbahmdpanel.R;
-import com.example.nokhbahmdpanel.VinfoScreen;
-import com.example.nokhbahmdpanel.model.Help;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.nokhba.nokhbahmdpanel.InfoScreen;
+import com.nokhba.nokhbahmdpanel.R;
+import com.nokhba.nokhbahmdpanel.model.Help;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import adapter.HelpAdapter;
-import adapter.RecyclerAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
