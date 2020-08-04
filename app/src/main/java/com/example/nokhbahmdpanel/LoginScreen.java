@@ -85,7 +85,10 @@ public class LoginScreen extends AppCompatActivity {
                   int act = users.getIsActive();
 
                   try {
+
                       String d =Security.decrypt(mdp);
+                      Log.d("crypte",Security.encrypt(p).toString());
+                      //Log.d("decript",d);
                       if(u.equals(user) && p.equals(d) && act ==1) {
                        saveData(u,id);
                        break;
