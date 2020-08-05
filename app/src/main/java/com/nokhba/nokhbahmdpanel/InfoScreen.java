@@ -75,8 +75,9 @@ public class InfoScreen extends AppCompatActivity {
         call_btn = findViewById(R.id.call_id);
         map_btn = findViewById(R.id.map_id);
         notification_btn = findViewById(R.id.notification_id);
+        Help user = (Help) getIntent().getSerializableExtra("help");
 
-            Help user = (Help) getIntent().getSerializableExtra("help");
+
             fullname.setText(user.getNom()+" "+user.getPrenom());
             phone_number.setText(user.getPhone());
             covid_y_n.setText(user.getCovid_you());
@@ -94,8 +95,10 @@ public class InfoScreen extends AppCompatActivity {
         notification_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent intent = new Intent(InfoScreen.this,NotificationScreen.class);
-            startActivity(intent);
+            Intent i = new Intent(InfoScreen.this,NotificationScreen.class);
+                i.putExtra("phone",user.getPhone());
+                i.putExtra("token",user.getToken());
+            startActivity(i);
             }
         });
         //map button

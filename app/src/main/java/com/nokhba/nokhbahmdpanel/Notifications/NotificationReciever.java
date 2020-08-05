@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Vibrator;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
@@ -27,6 +28,7 @@ public class NotificationReciever extends FirebaseMessagingService {
 
     }
     private void showNotification(Context context, String title, String body){
+        vibrate(context);
         Random random=new Random();
         int id=random.nextInt();
         NotificationCompat.Builder buler = new NotificationCompat.Builder(context, context.getString(R.string.channal_id))
@@ -51,5 +53,10 @@ public class NotificationReciever extends FirebaseMessagingService {
         PendingIntent p =PendingIntent.getActivity(context,0,i,0);
         return p;
     }
+    private static void vibrate(Context context){
+        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        v.vibrate(2000);
 
+    }
 }

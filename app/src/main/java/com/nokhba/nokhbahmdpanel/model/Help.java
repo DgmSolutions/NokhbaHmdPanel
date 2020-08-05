@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class Help implements Serializable {
-    private String nom,prenom,phone,covid_you,Fcovid,service,desc,date;
+    private String nom,prenom,phone,covid_you,Fcovid,service,desc,date,token;
     private int numCovide;
     private Map<String,Double> localisation;
 
     public Help() {
     }
 
-    public Help(String nom, String prenom, String phone, String covid_you, String fcovid, String service, String desc, String date, int numCovide, Map<String, Double> localisation) {
+    public Help(String nom, String prenom, String phone, String covid_you, String fcovid, String service, String desc, String date, int numCovide, Map<String, Double> localisation,String to) {
         this.nom = nom;
         this.prenom = prenom;
         this.phone = phone;
@@ -22,6 +22,7 @@ public class Help implements Serializable {
         this.date = date;
         this.numCovide = numCovide;
         this.localisation = localisation;
+        this.token=to;
     }
     //for recycaleView
 
@@ -30,6 +31,14 @@ public class Help implements Serializable {
         this.prenom = prenom;
         this.desc = desc;
         this.date = date;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getNom() {

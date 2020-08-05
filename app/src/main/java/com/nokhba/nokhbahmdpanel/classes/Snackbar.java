@@ -3,6 +3,8 @@ package com.nokhba.nokhbahmdpanel.classes;
 import android.graphics.Color;
 import android.view.View;
 
+import com.nokhba.nokhbahmdpanel.R;
+
 public class Snackbar {
 
     public static void SnackBarMessage(View view, CharSequence message, int duration, int color) {
@@ -10,10 +12,10 @@ public class Snackbar {
         /**/
         com.google.android.material.snackbar.Snackbar snack = com.google.android.material.snackbar.Snackbar.make(view, message, duration);
         /**/
-        snack.setAction("Ok", View::onCancelPendingInputEvents);//
+        snack.setAction(view.getResources().getString(R.string.ok), View::onCancelPendingInputEvents);//
 
         /**/
-        snack.setActionTextColor(Color.WHITE);
+        snack.setActionTextColor(android.R.color.holo_green_light);
         /**/
         View snackview = snack.getView();
         /**/

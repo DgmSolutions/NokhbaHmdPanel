@@ -8,4 +8,5 @@
     <color name="green">#00BA29</color>
     <color name="green0">#16E42A</color>
     <color name="Eblack">#4C4C4C</color>
+    <color name="holo_green"> #ff99cc00</color>
 </resources>

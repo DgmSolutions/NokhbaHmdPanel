@@ -19,6 +19,9 @@
     <string name="notification_title">عنوان الإشعار</string>
     <string name="notification_msg">محتوى اللإشعار</string>
     <string name="notification_send">ارسال</string>
+    <string name="notSend">"لم يتم ارسال الإشعارتحقق من الإنترنت الخاص بك"</string>
+    <string name="send">تم ارسال الإشعار بنجاح</string>
+    <string name="ok">موافق</string>
     <!-- Notification-->
     <string name="channal_id">panel</string>
     <string name="channal_dsc">Demande service</string>
